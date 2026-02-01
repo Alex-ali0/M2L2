@@ -4,12 +4,13 @@ from random import randint
 from logic import Pokemon, Wizard, Fighter
 bot = telebot.TeleBot(token) 
 
-
 @bot.message_handler(commands=['start'])
 def start(message):
-        bot.reply_to(message,"Привет, это бот который будет кидать вам рандомных покемонов")
+        photo_path = '1.PNG'
+        bot.reply_to(message,"Привет, это бот который будет кидать вам рандомных покемонов\n/go - создать покемона")
         bot.reply_to(message,"все команды тут ---> /infor")
-
+        with open(photo_path, 'rb') as photo:
+            bot.send_photo(message.chat.id, photo)
 @bot.message_handler(commands=['infor'])
 def info(message):
         if message.from_user.username in Pokemon.pokemons.keys():
@@ -80,6 +81,7 @@ def attack_pok(message):
 
 
 bot.infinity_polling(none_stop=True)
+
 
 
 
